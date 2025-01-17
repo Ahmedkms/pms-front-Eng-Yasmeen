@@ -20,8 +20,28 @@ include ('../inc/navbar.php');?>
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row">
+       
             <div class="col-8 mx-auto">
-                <form action="handellers/handelcontact.php" class="form border my-2 p-3">
+            <?php
+                if (isset($_SESSION['success'])) {
+                    echo "<div class='alert alert-success'>" . $_SESSION['success'] . "</div>";
+                    unset($_SESSION['success']); // حذف الرسالة بعد عرضها
+                }
+                ?>
+                <?php
+
+                if (isset($_SESSION['errors'])):
+                    foreach ($_SESSION['errors'] as $error):
+                ?>
+                        <div class="alert alert-danger text-center">
+                            <?php echo $error; ?>
+                        </div>
+                <?php
+                    endforeach;
+                    unset($_SESSION['errors']);
+                endif;
+                ?>
+                <form action="../handellers/handelcontact.php" method="POST" class="form border my-2 p-3">
                     <div class="mb-3">
                         <div class="mb-3">
                             <label for="name">Name</label>
@@ -36,7 +56,7 @@ include ('../inc/navbar.php');?>
                             <textarea name="message" id="m" class="form-control" rows="7"></textarea>
                         </div>
                         <div class="mb-3">
-                            <input type="submit" value="Send" id="" class="btn btn-success">
+                            <input type="submit" value="send" id="" class="btn btn-success">
                         </div>
                     </div>
                 </form>
