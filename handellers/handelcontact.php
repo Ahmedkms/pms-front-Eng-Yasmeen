@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST" ){
     }
 
 
-
+    //handel errors
     if (empty($errors)){
         $messges_file = fopen("../Data/messages.csv", "a");
         $ms_data = [$name,$email,$message];
@@ -45,7 +45,9 @@ if ($_SERVER["REQUEST_METHOD"]=="POST" ){
         $_SESSION['success'] = "Message sent successfully!";
         redirect("../NavItem/contact.php");
         die();
-    }else {
+    }
+    // in the case of every thing is ok
+    else {
         $_SESSION['errors'] = $errors;
         redirect("../NavItem/contact.php");
         die;
